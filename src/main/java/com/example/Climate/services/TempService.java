@@ -1,5 +1,6 @@
 package com.example.Climate.services;
 
+import com.example.Climate.exception.QueryDataException;
 import com.example.Climate.models.Temp;
 import com.example.Climate.repositories.TempRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ public class TempService {
     TempRepository repo;
 
     public List<Temp> getAllTemp() {
-        return repo.findAll();
+        List<Temp> tempList = repo.findAll();
+        if (tempList.isEmpty()) {
+            throw new QueryDataException("All temp list is empty!");
+        }
+        return tempList;
     }
 }

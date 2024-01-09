@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Temp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     @Column(name = "year")
     private int year;
@@ -23,13 +24,20 @@ public class Temp {
     @Column(name = "maxtemp")
     private Float maxTemp;
     @ManyToOne
-    @JoinColumn(name = "cityname", referencedColumnName = "cityname")
+    @JoinColumn(name = "city_id", foreignKey = @ForeignKey(name = "fk_temp_to_city"), referencedColumnName = "id")
     private City city;
+    @Column(name = "cityname")
+    private String cityName;
     @ManyToOne
-    @JoinColumn(name = "countryname", referencedColumnName = "countryname")
+    @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_temp_to_country"), referencedColumnName = "id")
     private Country country;
-
+    @Column(name = "countryname")
+    private String countryName;
     @ManyToOne
-    @JoinColumn(name = "statename", referencedColumnName = "statename")
+    @JoinColumn(name = "state_id", foreignKey = @ForeignKey(name = "fk_temp_to_state"), referencedColumnName = "id")
     private State state;
+    @Column(name = "statename")
+    private String stateName;
+    private String latitude;
+    private String longtitude;
 }

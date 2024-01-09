@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class GlobalTemp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
     @Column(name = "year")
     private int year;

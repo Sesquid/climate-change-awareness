@@ -13,10 +13,13 @@ import lombok.NoArgsConstructor;
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     @Column(name = "statename")
     private String stateName;
     @ManyToOne
-    @JoinColumn(name = "countryname", referencedColumnName = "countryname")
+    @JoinColumn(name = "countryid", foreignKey = @ForeignKey(name = "fk_state_to_country"), referencedColumnName = "id")
     private Country country;
+    @Column(name = "countryname")
+    private String countryName;
 }

@@ -13,12 +13,17 @@ import lombok.NoArgsConstructor;
 public class Population {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     @ManyToOne
-    @JoinColumn(name = "country", referencedColumnName = "countryname")
+    @JoinColumn(name = "countryid", foreignKey = @ForeignKey(name = "fk_population_to_country"), referencedColumnName = "id")
     private Country country;
+    @Column(name = "countryname")
+    private String countryName;
+    @Column(name = "countrycode")
+    private String countryCode;
     @Column(name = "year")
     private int year;
-    @Column(name = "populationInf")
+    @Column(name = "populationamount")
     private Long population;
 }
