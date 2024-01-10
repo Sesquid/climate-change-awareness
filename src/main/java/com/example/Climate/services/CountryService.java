@@ -21,5 +21,12 @@ public class CountryService {
         return countryList;
     }
 
+    public int getNumberOfCountries() {
+        int numberOfCountries = repo.getNumberOfCountries();
+        if (numberOfCountries == 0) {
+            throw new QueryDataException("Number of Countries is zero!");
+        }
+        return numberOfCountries;
+    }
 
 }

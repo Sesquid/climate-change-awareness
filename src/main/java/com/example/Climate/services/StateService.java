@@ -29,4 +29,12 @@ public class StateService {
         }
         return stateList;
     }
+
+    public int getNumberOfStates () {
+        int numberOfStates = repo.getNumberOfState();
+        if(numberOfStates == 0) {
+            throw new QueryDataException("Number of states is zero!");
+        }
+        return numberOfStates;
+    }
 }

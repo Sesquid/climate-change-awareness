@@ -24,17 +24,17 @@ public class Temp {
     @Column(name = "maxtemp")
     private Float maxTemp;
     @ManyToOne
-    @JoinColumn(name = "city_id", foreignKey = @ForeignKey(name = "fk_temp_to_city"), referencedColumnName = "id")
+    @JoinColumn(name = "cityid", foreignKey = @ForeignKey(name = "fk_temp_to_city"), referencedColumnName = "id")
     private City city;
     @Column(name = "cityname")
     private String cityName;
     @ManyToOne
-    @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_temp_to_country"), referencedColumnName = "id")
+    @JoinColumn(name = "countryid", foreignKey = @ForeignKey(name = "fk_temp_to_country"), referencedColumnName = "id")
     private Country country;
     @Column(name = "countryname")
     private String countryName;
     @ManyToOne
-    @JoinColumn(name = "state_id", foreignKey = @ForeignKey(name = "fk_temp_to_state"), referencedColumnName = "id")
+    @JoinColumn(name = "stateid", foreignKey = @ForeignKey(name = "fk_temp_to_state"), referencedColumnName = "id")
     private State state;
     @Column(name = "statename")
     private String stateName;

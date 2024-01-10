@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/City")
+@RequestMapping("/api/city")
 public class CityController {
     @Autowired
     CityService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public ResponseEntity<?> getAllCities() {
         List<City> cityList = service.getAllCities();
         return new ResponseEntity<>(cityList, HttpStatus.OK);
@@ -26,5 +26,11 @@ public class CityController {
     public ResponseEntity<?> getCityByCountryName(@RequestParam("country-name") String countryname) {
         List<City> cityList = service.getCityByCountryName(countryname);
         return new ResponseEntity<>(cityList, HttpStatus.OK);
+    }
+
+    @GetMapping("/number-of-cities")
+    public ResponseEntity<?> getNumberOfCities() {
+        int numberOfCities = service.getNumberOfCities();
+        return new ResponseEntity<>(numberOfCities, HttpStatus.OK);
     }
 }

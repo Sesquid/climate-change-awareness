@@ -30,4 +30,9 @@ public class GlobalTempService {
         }
         return globalTempList;
     }
+
+    public Object getMinAndMaxYear() {
+        Object yearRange = repo.findMinAndMaxYear();
+        return yearRange;
+    }
 }

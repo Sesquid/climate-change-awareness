@@ -28,4 +28,12 @@ public class CityService {
         }
         return cityList;
     }
+
+    public int getNumberOfCities() {
+        int numberOfCities = repo.getNumberOfCities();
+        if (numberOfCities == 0) {
+            throw new QueryDataException("Number of Cities is zero!");
+        }
+        return numberOfCities;
+    }
 }

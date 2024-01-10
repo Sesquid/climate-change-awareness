@@ -13,4 +13,7 @@ public interface GlobalTempRepository extends JpaRepository<GlobalTemp, Integer>
 
     @Query("SELECT g FROM GlobalTemp g WHERE g.year = :year")
     List<GlobalTemp> getGlobalTempByYear(@Param("year") int year);
+
+    @Query("SELECT MIN(t.year) as minYear, MAX(t.year) as maxYear FROM GlobalTemp t")
+    Object findMinAndMaxYear();
 }

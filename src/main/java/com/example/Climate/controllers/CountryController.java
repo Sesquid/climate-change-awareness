@@ -17,14 +17,20 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/Country")
+@RequestMapping("/api/country")
 public class CountryController {
     @Autowired
     CountryService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public ResponseEntity<?> getAllCountries() {
         List<Country> countryList = service.getAllCountries();
         return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
+
+    @GetMapping("/number-of-countries")
+    public ResponseEntity<?> getNumberOfCountries() {
+        int numberOfCountries = service.getNumberOfCountries();
+        return new ResponseEntity<>(numberOfCountries, HttpStatus.OK);
     }
 }

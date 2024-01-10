@@ -11,13 +11,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/globalTemp")
+@RequestMapping("/api/global-temp")
 public class GlobalTempController {
 
     @Autowired
     GlobalTempService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public ResponseEntity<?> getAllGlobalTemp() {
         List<GlobalTemp> globalTempList = service.getAllGlobalTemp();
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
@@ -27,5 +27,11 @@ public class GlobalTempController {
     public ResponseEntity<?> getGlobalTempByYear(@RequestParam int year) {
         List<GlobalTemp> globalTempList = service.getGlobalTempByYear(year);
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
+    }
+
+    @GetMapping("/year-range")
+    public ResponseEntity<?> getMinAndMaxYear() {
+        Object yearRange = service.getMinAndMaxYear();
+        return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
 }

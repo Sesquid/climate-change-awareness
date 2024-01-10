@@ -16,7 +16,7 @@ public class Util {
     public void csv2Dto1D() throws IOException {
         Set<String> s = new TreeSet<>();
         String inputFile = "C:/Users/admin/Downloads/dataset-Climate/Population.csv";
-        String outputFile = "C:/Users/admin/Downloads/dataset-Climate/PopulationOut.csv";
+        String outputFile = "C:/Users/admin/Downloads/dataset-Climate/PopulationOut2.csv";
         List<String[]> population2D = readCSV(inputFile);
         String[] fields = population2D.get(0);
         List<String[]> population1D = new ArrayList<>();
@@ -32,14 +32,13 @@ public class Util {
                 population1D.add(newRow);
             }
         }
-        for (String[] row : population1D) {
-            System.out.println(String.join(" ", row));
-        }
         System.out.println(s.size());
-//        FileWriter writer = new FileWriter(outputFile);
-//        for (String[] row: population1D) {
-//            writer.append(String.join(",", row)).append("\n");
-//        }
+        FileWriter writer = new FileWriter(outputFile);
+        for (String[] row : population1D) {
+            if (row[2].equals("2013")) {
+                writer.append(String.join(",", row)).append("\n");
+            }
+        }
     }
 
     public List<String[]> readCSV(String inputFile) throws FileNotFoundException {
@@ -50,9 +49,6 @@ public class Util {
         }
     }
 
-    public void createTable() {
-
-    }
 
     public static void main(String[] args) throws IOException {
         Util util = new Util();

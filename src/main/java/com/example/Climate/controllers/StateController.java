@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/State")
+@RequestMapping("/api/state")
 public class StateController {
     @Autowired
     StateService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public ResponseEntity<?> getAllCities() {
         List<State> stateList = service.getAllStates();
         return new ResponseEntity<>(stateList, HttpStatus.OK);
@@ -28,5 +28,11 @@ public class StateController {
     public ResponseEntity<?> getStateByCountryName(@RequestParam("country-name") String countryName) {
         List<State> stateList = service.getStateByCountryName(countryName);
         return new ResponseEntity<>(stateList, HttpStatus.OK);
+    }
+
+    @GetMapping("/number-of-states")
+    public ResponseEntity<?> getNumberOfStates() {
+        int numberOfStates = service.getNumberOfStates();
+        return new ResponseEntity<>(numberOfStates, HttpStatus.OK);
     }
 }

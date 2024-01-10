@@ -13,4 +13,7 @@ public interface StateRepository extends JpaRepository<State, Integer> {
 
     @Query("SELECT s FROM State s WHERE s.countryName = :countryName")
     List<State> getStateByCountryName(@Param("countryName") String countryName);
+
+    @Query("SELECT COUNT(*) From State")
+    int getNumberOfState();
 }
