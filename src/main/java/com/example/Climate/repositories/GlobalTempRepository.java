@@ -1,6 +1,7 @@
 package com.example.Climate.repositories;
 
-import com.example.Climate.models.GlobalTemp;
+import com.example.Climate.models.GlobalTemperature;
+import com.example.Climate.models.GlobalTemperature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,11 +10,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface GlobalTempRepository extends JpaRepository<GlobalTemp, Integer> {
+public interface GlobalTempRepository extends JpaRepository<GlobalTemperature, Integer> {
 
-    @Query("SELECT g FROM GlobalTemp g WHERE g.year = :year")
-    List<GlobalTemp> getGlobalTempByYear(@Param("year") int year);
+    @Query("SELECT g FROM GlobalTemperature g WHERE g.year = :year")
+    List<GlobalTemperature> getGlobalTempByYear(@Param("year") int year);
 
-    @Query("SELECT MIN(t.year) as minYear, MAX(t.year) as maxYear FROM GlobalTemp t")
-    Object findMinAndMaxYear();
+    @Query("SELECT MIN(g.year) FROM GlobalTemperature g")
+    int findMinYear();
+
+    @Query("SELECT MAX(g.year) FROM GlobalTemperature g")
+    int findMaxYear();
 }

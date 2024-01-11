@@ -1,6 +1,7 @@
 package com.example.Climate.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,17 +14,17 @@ import lombok.NoArgsConstructor;
 public class Population {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "population_id")
     private int id;
     @ManyToOne
-    @JoinColumn(name = "countryid", foreignKey = @ForeignKey(name = "fk_population_to_country"), referencedColumnName = "id")
+    @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_population_to_country"), referencedColumnName = "country_id")
     private Country country;
-    @Column(name = "countryname")
+    @Column(name = "country_name")
     private String countryName;
-    @Column(name = "countrycode")
+    @Column(name = "country_code")
     private String countryCode;
     @Column(name = "year")
     private int year;
-    @Column(name = "populationamount")
+    @Column(name = "population_amount")
     private Long population;
 }

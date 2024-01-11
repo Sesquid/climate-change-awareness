@@ -1,12 +1,9 @@
 package com.example.Climate.controllers;
 
-import com.example.Climate.exception.QueryDataException;
 import com.example.Climate.models.Country;
-import com.example.Climate.repositories.CountryRepository;
 import com.example.Climate.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

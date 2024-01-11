@@ -1,6 +1,7 @@
 package com.example.Climate.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "country_id")
     private int id;
-    @Column(name = "countryname")
+    @Column(name = "country_name")
     private String countryName;
-    @Column(name = "countrycode")
+    @Column(name = "country_code")
     private String countryCode;
 }

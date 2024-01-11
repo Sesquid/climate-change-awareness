@@ -1,7 +1,7 @@
 package com.example.Climate.services;
 
-import com.example.Climate.exception.QueryDataException;
 import com.example.Climate.models.Population;
+import com.example.Climate.models.YearRange;
 import com.example.Climate.repositories.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,30 +14,17 @@ public class PopulationService {
     PopulationRepository repo;
 
     public List<Population> getAllPopulation() {
-        List<Population> populationList = repo.findAll();
-        if (populationList.isEmpty()) {
-            throw new QueryDataException("All Population list is empty!");
-        }
-        return populationList;
+        return repo.findAll();
     }
     public List<Population> getWorldPopulation() {
-        List<Population> populationList = repo.getWorldPopulation();
-        if(populationList.isEmpty()) {
-            throw new QueryDataException("World Population list is empty!");
-        }
-        return populationList;
+        return repo.getWorldPopulation();
     }
 
     public List<Population> getAllCountriesPopulation(int year) {
-        List<Population> populationList = repo.getAllCountriesPopulationByYear(year);
-        if (populationList.isEmpty()) {
-            throw new QueryDataException("All country population list by year is empty!");
-        }
-        return populationList;
+        return repo.getAllCountriesPopulationByYear(year);
     }
 
-    public Object getMinAndMaxYear() {
-        Object yearRange = repo.findMinAndMaxYear();
-        return yearRange;
+    public YearRange getMinAndMaxYear() {
+        return new YearRange(repo.findMinYear(), repo.findMaxYear());
     }
 }

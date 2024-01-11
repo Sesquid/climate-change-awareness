@@ -1,6 +1,7 @@
 package com.example.Climate.controllers;
 
 import com.example.Climate.models.Population;
+import com.example.Climate.models.YearRange;
 import com.example.Climate.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class PopulationController {
 
     @GetMapping("/year-range")
     public ResponseEntity<?> getMinAndMaxYear() {
-        Object yearRange = service.getMinAndMaxYear();
+        YearRange yearRange = service.getMinAndMaxYear();
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
 }

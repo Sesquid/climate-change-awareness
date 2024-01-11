@@ -16,4 +16,5 @@ public interface StateRepository extends JpaRepository<State, Integer> {
 
     @Query("SELECT COUNT(*) From State")
     int getNumberOfState();
+
 }

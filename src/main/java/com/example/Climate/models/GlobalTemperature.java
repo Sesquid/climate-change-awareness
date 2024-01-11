@@ -1,6 +1,7 @@
 package com.example.Climate.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,24 +10,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "globaltemp")
-public class GlobalTemp {
+@Table(name = "global_temperature")
+public class GlobalTemperature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "global_temperature_id")
     private Integer id;
     @Column(name = "year")
     private int year;
-    @Column(name = "avgtemp")
+    @Column(name = "average_temperature")
     private Float avgTemp;
-    @Column(name = "mintemp")
+    @Column(name = "min_temperature")
     private Float minTemp;
-    @Column(name = "maxtemp")
+    @Column(name = "max_temperature")
     private Float maxTemp;
-    @Column(name = "landoceanavgtemp")
+    @Column(name = "land_ocean_average_temperature")
     private Float landOceanAvgTemp;
-    @Column(name = "landoceanmintemp")
+    @Column(name = "land_ocean_min_temperature")
     private Float landOceanMinTemp;
-    @Column(name = "landoceanmaxtemp")
+    @Column(name = "land_ocean_max_temperature")
     private Float landOceanMaxTemp;
 }

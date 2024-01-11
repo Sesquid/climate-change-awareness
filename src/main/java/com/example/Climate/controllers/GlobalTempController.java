@@ -1,6 +1,7 @@
 package com.example.Climate.controllers;
 
-import com.example.Climate.models.GlobalTemp;
+import com.example.Climate.models.GlobalTemperature;
+import com.example.Climate.models.GlobalTemperature;
 import com.example.Climate.services.GlobalTempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,13 @@ public class GlobalTempController {
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAllGlobalTemp() {
-        List<GlobalTemp> globalTempList = service.getAllGlobalTemp();
+        List<GlobalTemperature> globalTempList = service.getAllGlobalTemp();
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
 
     @GetMapping("/")
     public ResponseEntity<?> getGlobalTempByYear(@RequestParam int year) {
-        List<GlobalTemp> globalTempList = service.getGlobalTempByYear(year);
+        List<GlobalTemperature> globalTempList = service.getGlobalTempByYear(year);
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
 

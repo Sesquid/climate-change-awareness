@@ -49,10 +49,11 @@ public class Util {
         }
     }
 
-
     public static void main(String[] args) throws IOException {
         Util util = new Util();
         util.csv2Dto1D();
+    }
 
+    public static void checkListEmpty(List<?> list) {
     }
 }
