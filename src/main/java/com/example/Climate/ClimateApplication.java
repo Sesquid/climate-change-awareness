@@ -6,7 +6,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class ClimateApplication {
+public class ClimateApplication { 
 
     public static void main(String[] args) {
         SpringApplication.run(ClimateApplication.class, args);
