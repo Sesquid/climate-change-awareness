@@ -40,4 +40,21 @@ public class PopulationController {
         YearRange yearRange = service.getMinAndMaxYear();
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
+
+    @GetMapping("/by-country")
+    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam String countryName) {
+        List<Population> populationList = service.getPopulationListByCountryName(countryName);
+        return new ResponseEntity<>(populationList, HttpStatus.OK);
+    }
+
+    @GetMapping("/all-countries/order-by-population/asc")
+    public ResponseEntity<?> getAllCountriesOrderByPopulationAsc(){
+        List<String> countryList = service.getAllCountriesOrderByPopulationAsc();
+        return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
+    @GetMapping("/all-countries/order-by-population/desc")
+    public ResponseEntity<?> getAllCountriesOrderByPopulationDesc(){
+        List<String> countryList = service.getAllCountriesOrderByPopulationDesc();
+        return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
 }

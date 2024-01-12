@@ -30,4 +30,16 @@ public class CountryController {
         int numberOfCountries = service.getNumberOfCountries();
         return new ResponseEntity<>(numberOfCountries, HttpStatus.OK);
     }
+
+    @GetMapping("/get-all/order-by-name/asc")
+    public ResponseEntity<?> getAllCountriesOrderByNameAsc() {
+        List<String> countryList = service.getAllCountriesOrderByNameAsc();
+        return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all/order-by-name/desc")
+    public ResponseEntity<?> getAllCountriesOrderByNameDesc() {
+        List<String> countryList = service.getAllCountriesOrderByNameDesc();
+        return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
 }

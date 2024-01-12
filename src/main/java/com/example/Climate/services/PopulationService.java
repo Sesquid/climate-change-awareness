@@ -27,4 +27,15 @@ public class PopulationService {
     public YearRange getMinAndMaxYear() {
         return new YearRange(repo.findMinYear(), repo.findMaxYear());
     }
+
+    public List<Population> getPopulationListByCountryName(String countryName) {
+        return repo.getPopulationListByCountryName(countryName);
+    }
+
+    public List<String> getAllCountriesOrderByPopulationAsc(){
+        return repo.getAllCountriesOrderByPopulationAsc();
+    }
+    public List<String> getAllCountriesOrderByPopulationDesc(){
+        return repo.getAllCountriesOrderByPopulationDesc();
+    }
 }

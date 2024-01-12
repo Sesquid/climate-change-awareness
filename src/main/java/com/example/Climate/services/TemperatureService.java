@@ -2,17 +2,16 @@ package com.example.Climate.services;
 
 import com.example.Climate.models.Temperature;
 import com.example.Climate.models.YearRange;
-import com.example.Climate.repositories.TempRepository;
+import com.example.Climate.repositories.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TempService {
+public class TemperatureService {
     @Autowired
-    TempRepository repo;
+    TemperatureRepository repo;
 
     public List<Temperature> getAllTemp() {
         return repo.findAll();
@@ -28,5 +27,11 @@ public class TempService {
 
     public YearRange getMinAndMaxYear() {
         return new YearRange(repo.findMinYear(), repo.findMaxYear());
+    }
+    public List<String> getAllCountriesOrderByTemperatureAsc(){
+        return repo.getAllCountriesOrderByTemperatureAsc();
+    }
+    public List<String> getAllCountriesOrderByTemperatureDesc(){
+        return repo.getAllCountriesOrderByTemperatureDesc();
     }
 }
