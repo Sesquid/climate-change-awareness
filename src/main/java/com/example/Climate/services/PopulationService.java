@@ -38,4 +38,8 @@ public class PopulationService {
     public List<String> getAllCountriesOrderByPopulationDesc(){
         return repo.getAllCountriesOrderByPopulationDesc();
     }
+
+    public Long getPopulationDifference(String countryName, int startYear, int endYear) {
+        return repo.getPopulationDifference(countryName, startYear, endYear);
+    }
 }

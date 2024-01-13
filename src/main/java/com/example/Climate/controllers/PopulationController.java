@@ -48,13 +48,20 @@ public class PopulationController {
     }
 
     @GetMapping("/all-countries/order-by-population/asc")
-    public ResponseEntity<?> getAllCountriesOrderByPopulationAsc(){
+    public ResponseEntity<?> getAllCountriesOrderByPopulationAsc() {
         List<String> countryList = service.getAllCountriesOrderByPopulationAsc();
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
+
     @GetMapping("/all-countries/order-by-population/desc")
-    public ResponseEntity<?> getAllCountriesOrderByPopulationDesc(){
+    public ResponseEntity<?> getAllCountriesOrderByPopulationDesc() {
         List<String> countryList = service.getAllCountriesOrderByPopulationDesc();
         return new ResponseEntity<>(countryList, HttpStatus.OK);
+    }
+
+    @GetMapping("/diff")
+    public ResponseEntity<?> getPopulationDifference(@RequestParam String countryName, @RequestParam int startYear, @RequestParam int endYear) {
+        Long diff = service.getPopulationDifference(countryName, startYear, endYear);
+        return new ResponseEntity<>(diff, HttpStatus.OK);
     }
 }

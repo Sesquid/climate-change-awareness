@@ -33,4 +33,11 @@ public interface PopulationRepository extends JpaRepository<Population, Integer>
     @Query("SELECT p.countryName FROM Population p WHERE p.year = 2013 ORDER BY p.population DESC")
     List<String> getAllCountriesOrderByPopulationDesc();
 
+
+    @Query("SELECT distinct" +
+            "   (SELECT p.population FROM Population p WHERE p.countryName = :countryName AND p.year = :endYear) " +
+            "   - (SELECT p.population FROM Population p WHERE p.countryName = :countryName AND p.year = :startYear) " +
+            "FROM Population p " +
+            "WHERE p.countryName = :countryName")
+    Long getPopulationDifference(@Param("countryName") String countryName, @Param("startYear") int startYear, @Param("endYear") int endYear);
 }
