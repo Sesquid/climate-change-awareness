@@ -10,11 +10,12 @@ import java.util.List;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Integer> {
 
-    @Query("SELECT COUNT(*) From Country")
+    @Query("SELECT COUNT(*) FROM Country")
     int getNumberOfCountries();
 
-    @Query("SELECT c.countryName From Country c Order by c.countryName Asc")
+    @Query("SELECT c.countryName FROM Country c ORDER BY c.countryName ASC")
     List<String> getAllCountriesOrderByNameAsc();
-    @Query("SELECT c.countryName From Country c Order by c.countryName Desc")
+
+    @Query("SELECT c.countryName FROM Country c ORDER BY c.countryName DESC")
     List<String> getAllCountriesOrderByNameDesc();
 }

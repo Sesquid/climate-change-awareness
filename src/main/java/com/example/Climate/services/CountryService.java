@@ -20,11 +20,9 @@ public class CountryService {
         return repo.getNumberOfCountries();
     }
 
-    public List<String> getAllCountriesOrderByNameAsc () {
-        return repo.getAllCountriesOrderByNameAsc();
+    public List<String> getAllCountriesOrderByName(String order) {
+        return order.equals("ASC") ? repo.getAllCountriesOrderByNameAsc() : repo.getAllCountriesOrderByNameDesc();
     }
 
-    public List<String> getAllCountriesOrderByNameDesc () {
-        return repo.getAllCountriesOrderByNameDesc();
-    }
+
 }

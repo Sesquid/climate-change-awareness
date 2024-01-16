@@ -16,8 +16,8 @@ public class CityService {
         return repo.findAll();
     }
 
-    public List<City> getCityByCountryName(String countryname) {
-        return repo.getCityByCountryName(countryname);
+    public List<City> getCityByCountryName(String countryName) {
+        return repo.getCityByCountryName(countryName);
     }
 
     public int getNumberOfCities() {

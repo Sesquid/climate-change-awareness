@@ -22,25 +22,20 @@ public class TemperatureController {
     }
 
     @GetMapping("/year-range")
-    public ResponseEntity<?> getMinAndMaxYear() {
-        Object yearRange = service.getMinAndMaxYear();
+    public ResponseEntity<?> findYearRange() {
+        Object yearRange = service.findYearRange();
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getTempListByCoutryName(@RequestParam String countryName) {
+    public ResponseEntity<?> getTempListByCountryName(@RequestParam String countryName) {
         List<Temperature> tempList = service.getTempByCountry(countryName);
         return new ResponseEntity<>(tempList, HttpStatus.OK);
     }
 
-    @GetMapping("/all-countries/order-by-temperature/asc")
-    public ResponseEntity<?> getAllCountriesOrderByTemperatureAsc(){
-        List<String> countryList = service.getAllCountriesOrderByTemperatureAsc();
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
-    @GetMapping("/all-countries/order-by-temperature/desc")
-    public ResponseEntity<?> getAllCountriesOrderByTemperatureDesc(){
-        List<String> countryList = service.getAllCountriesOrderByTemperatureDesc();
+    @GetMapping("/all-countries/order-by-temperature")
+    public ResponseEntity<?> getAllCountriesOrderByTemperature(@RequestParam String order) {
+        List<String> countryList = service.getAllCountriesOrderByTemperature(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 

@@ -5,10 +5,7 @@ import com.example.Climate.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,27 +16,16 @@ public class CountryController {
     @Autowired
     CountryService service;
 
-    @GetMapping("/get-all")
-    public ResponseEntity<?> getAllCountries() {
-        List<Country> countryList = service.getAllCountries();
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
-
     @GetMapping("/number-of-countries")
     public ResponseEntity<?> getNumberOfCountries() {
         int numberOfCountries = service.getNumberOfCountries();
         return new ResponseEntity<>(numberOfCountries, HttpStatus.OK);
     }
 
-    @GetMapping("/get-all/order-by-name/asc")
-    public ResponseEntity<?> getAllCountriesOrderByNameAsc() {
-        List<String> countryList = service.getAllCountriesOrderByNameAsc();
+    @GetMapping("/get-all/order-by-name")
+    public ResponseEntity<?> getAllCountriesOrderByName(@RequestParam String order) {
+        List<String> countryList = service.getAllCountriesOrderByName(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 
-    @GetMapping("/get-all/order-by-name/desc")
-    public ResponseEntity<?> getAllCountriesOrderByNameDesc() {
-        List<String> countryList = service.getAllCountriesOrderByNameDesc();
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
 }

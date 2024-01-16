@@ -2,6 +2,7 @@ package com.example.Climate.controllers;
 
 import com.example.Climate.models.GlobalTemperature;
 import com.example.Climate.models.GlobalTemperature;
+import com.example.Climate.models.YearRange;
 import com.example.Climate.services.GlobalTempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,8 @@ public class GlobalTempController {
     }
 
     @GetMapping("/year-range")
-    public ResponseEntity<?> getMinAndMaxYear() {
-        Object yearRange = service.getMinAndMaxYear();
+    public ResponseEntity<?> findYearRange() {
+        YearRange yearRange = service.findYearRange();
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
 }

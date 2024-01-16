@@ -21,7 +21,7 @@ public class StateService {
         return repo.getStateByCountryName(countryName);
     }
 
-    public int getNumberOfStates () {
+    public int getNumberOfStates() {
         return repo.getNumberOfState();
     }
 }

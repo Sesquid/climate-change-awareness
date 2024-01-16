@@ -36,9 +36,9 @@ public class PopulationController {
     }
 
     @GetMapping("/year-range")
-    public ResponseEntity<?> getMinAndMaxYear() {
-        YearRange yearRange = service.getMinAndMaxYear();
-        return new ResponseEntity<>(yearRange, HttpStatus.OK);
+    public ResponseEntity<?> findYearRange() {
+        YearRange years = service.findYearRange();
+        return new ResponseEntity<>(years, HttpStatus.OK);
     }
 
     @GetMapping("/by-country")
@@ -47,15 +47,9 @@ public class PopulationController {
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
-    @GetMapping("/all-countries/order-by-population/asc")
-    public ResponseEntity<?> getAllCountriesOrderByPopulationAsc() {
-        List<String> countryList = service.getAllCountriesOrderByPopulationAsc();
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
-
-    @GetMapping("/all-countries/order-by-population/desc")
-    public ResponseEntity<?> getAllCountriesOrderByPopulationDesc() {
-        List<String> countryList = service.getAllCountriesOrderByPopulationDesc();
+    @GetMapping("/all-countries/order-by-population")
+    public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam String order) {
+        List<String> countryList = service.getAllCountriesOrderByPopulation(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 

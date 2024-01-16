@@ -6,6 +6,7 @@ import com.example.Climate.repositories.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 @Service
@@ -25,13 +26,13 @@ public class TemperatureService {
         return repo.getTempByCountryAndCity(countryName, cityName);
     }
 
-    public YearRange getMinAndMaxYear() {
-        return new YearRange(repo.findMinYear(), repo.findMaxYear());
+    public YearRange findYearRange() {
+        Tuple yearRange = repo.findYearRange();
+        return new YearRange(yearRange.get("start", Integer.class), yearRange.get("end", Integer.class));
     }
-    public List<String> getAllCountriesOrderByTemperatureAsc(){
-        return repo.getAllCountriesOrderByTemperatureAsc();
+
+    public List<String> getAllCountriesOrderByTemperature(String order) {
+        return order.equals("ASC") ? repo.getAllCountriesOrderByTemperatureAsc() : repo.getAllCountriesOrderByTemperatureDesc();
     }
-    public List<String> getAllCountriesOrderByTemperatureDesc(){
-        return repo.getAllCountriesOrderByTemperatureDesc();
-    }
+
 }

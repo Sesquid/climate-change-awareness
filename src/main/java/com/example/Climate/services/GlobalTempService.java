@@ -7,6 +7,7 @@ import com.example.Climate.repositories.GlobalTempRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 @Service
@@ -22,7 +23,8 @@ public class GlobalTempService {
         return repo.getGlobalTempByYear(year);
     }
 
-    public YearRange getMinAndMaxYear() {
-        return new YearRange(repo.findMinYear(), repo.findMaxYear());
+    public YearRange findYearRange() {
+        Tuple yearRange = repo.findYearRange();
+        return new YearRange(yearRange.get("start", Integer.class), yearRange.get("end", Integer.class));
     }
 }
