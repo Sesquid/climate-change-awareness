@@ -1,6 +1,7 @@
 package com.example.Climate.services;
 
 import com.example.Climate.models.Population;
+import com.example.Climate.models.RegionInformation;
 import com.example.Climate.models.YearRange;
 import com.example.Climate.repositories.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class PopulationService {
         return order.equals("ASC") ? repo.getAllCountriesOrderByPopulationAsc() : repo.getAllCountriesOrderByPopulationDesc();
     }
 
-    public Long getPopulationDifference(String countryName, int startYear, int endYear) {
-        return repo.getPopulationDifference(countryName, startYear, endYear);
+    public Long getPopulationDifference(RegionInformation region) {
+        return repo.getPopulationDifference(region);
     }
 }

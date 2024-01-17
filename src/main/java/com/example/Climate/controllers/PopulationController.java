@@ -1,6 +1,7 @@
 package com.example.Climate.controllers;
 
 import com.example.Climate.models.Population;
+import com.example.Climate.models.RegionInformation;
 import com.example.Climate.models.YearRange;
 import com.example.Climate.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,20 +43,20 @@ public class PopulationController {
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam String countryName) {
+    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam("countryName") String countryName) {
         List<Population> populationList = service.getPopulationListByCountryName(countryName);
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
     @GetMapping("/all-countries/order-by-population")
-    public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam String order) {
+    public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam("order") String order) {
         List<String> countryList = service.getAllCountriesOrderByPopulation(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 
     @GetMapping("/diff")
-    public ResponseEntity<?> getPopulationDifference(@RequestParam String countryName, @RequestParam int startYear, @RequestParam int endYear) {
-        Long diff = service.getPopulationDifference(countryName, startYear, endYear);
+    public ResponseEntity<?> getPopulationDifference(@RequestBody RegionInformation region) {
+        Long diff = service.getPopulationDifference(region);
         return new ResponseEntity<>(diff, HttpStatus.OK);
     }
 }

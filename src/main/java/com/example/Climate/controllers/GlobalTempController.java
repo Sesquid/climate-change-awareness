@@ -1,8 +1,9 @@
 package com.example.Climate.controllers;
 
+
+import com.example.Climate.DTO.TemperatureDTO;
+import com.example.Climate.models.*;
 import com.example.Climate.models.GlobalTemperature;
-import com.example.Climate.models.GlobalTemperature;
-import com.example.Climate.models.YearRange;
 import com.example.Climate.services.GlobalTempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class GlobalTempController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> getGlobalTempByYear(@RequestParam int year) {
+    public ResponseEntity<?> getGlobalTempByYear(@RequestParam("year") int year) {
         List<GlobalTemperature> globalTempList = service.getGlobalTempByYear(year);
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
@@ -35,5 +36,11 @@ public class GlobalTempController {
     public ResponseEntity<?> findYearRange() {
         YearRange yearRange = service.findYearRange();
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
+    }
+
+    @GetMapping("/diff")
+    public ResponseEntity<?> getCountryTemperatureDiff(@RequestBody RegionInformation region) {
+        TemperatureDTO tempDiff = service.getTemperatureDifference(region);
+        return new ResponseEntity<>(tempDiff, HttpStatus.OK);
     }
 }

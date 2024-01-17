@@ -1,8 +1,8 @@
 package com.example.Climate.services;
 
+import com.example.Climate.DTO.TemperatureDTO;
+import com.example.Climate.models.*;
 import com.example.Climate.models.GlobalTemperature;
-import com.example.Climate.models.GlobalTemperature;
-import com.example.Climate.models.YearRange;
 import com.example.Climate.repositories.GlobalTempRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +26,12 @@ public class GlobalTempService {
     public YearRange findYearRange() {
         Tuple yearRange = repo.findYearRange();
         return new YearRange(yearRange.get("start", Integer.class), yearRange.get("end", Integer.class));
+    }
+
+    public TemperatureDTO getTemperatureDifference(RegionInformation region) {
+        Tuple tempDiff = repo.getWorldTemperatureDifference(region);
+        return new TemperatureDTO((Float) tempDiff.get("avgTemp"),
+                (Float) tempDiff.get("minTemp"),
+                (Float) tempDiff.get("maxTemp"));
     }
 }

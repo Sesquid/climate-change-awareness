@@ -1,5 +1,7 @@
 package com.example.Climate.controllers;
 
+import com.example.Climate.DTO.TemperatureDTO;
+import com.example.Climate.models.RegionInformation;
 import com.example.Climate.models.Temperature;
 import com.example.Climate.services.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +30,26 @@ public class TemperatureController {
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getTempListByCountryName(@RequestParam String countryName) {
+    public ResponseEntity<?> getTempListByCountryName(@RequestParam("countryName") String countryName) {
         List<Temperature> tempList = service.getTempByCountry(countryName);
         return new ResponseEntity<>(tempList, HttpStatus.OK);
     }
 
     @GetMapping("/all-countries/order-by-temperature")
-    public ResponseEntity<?> getAllCountriesOrderByTemperature(@RequestParam String order) {
+    public ResponseEntity<?> getAllCountriesOrderByTemperature(@RequestParam("order") String order) {
         List<String> countryList = service.getAllCountriesOrderByTemperature(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 
+    @GetMapping("/diff")
+    public ResponseEntity<?> getCountryTemperatureDiff(@RequestBody RegionInformation region) {
+        TemperatureDTO tempDiff = service.getRegionTemperatureDifference(region);
+        return new ResponseEntity<>(tempDiff, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-city")
+    public ResponseEntity<?> getCityTempByYear(@RequestBody RegionInformation region) {
+        List<TemperatureDTO> tempList = service.getCityTempByYear(region);
+        return new ResponseEntity<>(tempList, HttpStatus.OK);
+    }
 }

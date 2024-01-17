@@ -41,4 +41,10 @@ public class Temperature {
     private String stateName;
     private String latitude;
     private String longtitude;
+
+    public Temperature(Float avgTemp, Float minTemp, Float maxTemp) {
+        this.avgTemp = avgTemp;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+    }
 }

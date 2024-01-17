@@ -1,6 +1,7 @@
 package com.example.Climate.repositories;
 
 import com.example.Climate.models.Population;
+import com.example.Climate.models.RegionInformation;
 import com.example.Climate.models.YearRange;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,7 +33,8 @@ public interface PopulationRepository extends JpaRepository<Population, Integer>
     @Query("SELECT p.countryName FROM Population p WHERE p.year = 2013 ORDER BY p.population DESC")
     List<String> getAllCountriesOrderByPopulationDesc();
 
-    @Query("SELECT p1.population - p2.population FROM Population p1, Population p2\n" +
-            "WHERE p1.countryName = :countryName AND p1.year = :endYear AND p2.countryName = :countryName  AND p2.year = :startYear")
-    Long getPopulationDifference(@Param("countryName") String countryName, @Param("startYear") int startYear, @Param("endYear") int endYear);
+    @Query("SELECT p1.population - p2.population FROM Population p1, Population p2 " +
+            "WHERE p1.countryName = :#{#region.countryName} AND p1.year = :#{#region.endYear} " +
+            "AND p2.countryName = :#{#region.countryName}  AND p2.year = :#{#region.startYear}")
+    Long getPopulationDifference(@Param("region") RegionInformation region);
 }

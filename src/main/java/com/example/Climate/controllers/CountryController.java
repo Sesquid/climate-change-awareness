@@ -23,7 +23,7 @@ public class CountryController {
     }
 
     @GetMapping("/get-all/order-by-name")
-    public ResponseEntity<?> getAllCountriesOrderByName(@RequestParam String order) {
+    public ResponseEntity<?> getAllCountriesOrderByName(@RequestParam("order") String order) {
         List<String> countryList = service.getAllCountriesOrderByName(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
