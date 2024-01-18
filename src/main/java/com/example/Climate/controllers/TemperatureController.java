@@ -47,9 +47,9 @@ public class TemperatureController {
         return new ResponseEntity<>(tempDiff, HttpStatus.OK);
     }
 
-    @GetMapping("/by-city")
+    @GetMapping("/by-year-range")
     public ResponseEntity<?> getCityTempByYear(@RequestBody RegionInformation region) {
-        List<TemperatureDTO> tempList = service.getCityTempByYear(region);
+        List<TemperatureDTO> tempList = service.getRegionTempByYearRange(region);
         return new ResponseEntity<>(tempList, HttpStatus.OK);
     }
 }

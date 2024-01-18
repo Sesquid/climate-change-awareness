@@ -30,7 +30,7 @@ public class PopulationController {
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
-    @GetMapping("/all-countries-population/")
+    @GetMapping("/all-countries-population")
     public ResponseEntity<?> getAllCountriesPopulationByYear(@RequestParam("year") int year) {
         List<Population> populationList = service.getAllCountriesPopulation(year);
         return new ResponseEntity<>(populationList, HttpStatus.OK);
@@ -58,5 +58,11 @@ public class PopulationController {
     public ResponseEntity<?> getPopulationDifference(@RequestBody RegionInformation region) {
         Long diff = service.getPopulationDifference(region);
         return new ResponseEntity<>(diff, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-year-range")
+    public ResponseEntity<?> getCountryPopulationByYearRange(@RequestBody RegionInformation region) {
+        List<Population> populationList = service.getCountryPopulationByYearRange(region);
+        return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 }

@@ -38,10 +38,14 @@ public class PopulationService {
     }
 
     public List<String> getAllCountriesOrderByPopulation(String order) {
-        return order.equals("ASC") ? repo.getAllCountriesOrderByPopulationAsc() : repo.getAllCountriesOrderByPopulationDesc();
+        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesOrderByPopulationAsc() : repo.getAllCountriesOrderByPopulationDesc();
     }
 
     public Long getPopulationDifference(RegionInformation region) {
         return repo.getPopulationDifference(region);
+    }
+
+    public List<Population> getCountryPopulationByYearRange(RegionInformation region){
+        return repo.getCountryPopulationByYearRange(region);
     }
 }

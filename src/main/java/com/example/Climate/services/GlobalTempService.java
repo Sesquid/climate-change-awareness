@@ -19,8 +19,8 @@ public class GlobalTempService {
         return repo.findAll();
     }
 
-    public List<GlobalTemperature> getGlobalTempByYear(int year) {
-        return repo.getGlobalTempByYear(year);
+    public List<GlobalTemperature> getGlobalTempByYearRange(RegionInformation region) {
+        return repo.getGlobalTempByYearRange(region);
     }
 
     public YearRange findYearRange() {

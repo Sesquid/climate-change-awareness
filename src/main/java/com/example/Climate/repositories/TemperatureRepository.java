@@ -17,20 +17,24 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
     List<Temperature> getTempByCountry(@Param("countryName") String countryName);
 
     @Query("SELECT t FROM Temperature t " +
+            "WHERE t.countryName = :#{#region.countryName} " +
+            "AND t.stateName IS NULL AND t.cityName IS NULL " +
+            "AND (t.year = :#{#region.startYear} OR t.year = :#{#region.endYear}) ORDER BY t.year DESC")
+    List<Temperature> getCountryTempByYearRange(@Param("region") RegionInformation region);
+
+    @Query("SELECT t FROM Temperature t " +
             "WHERE t.cityName = :#{#region.regionName} " +
             "AND t.countryName = :#{#region.countryName} " +
             "AND t.latitude = :#{#region.latitude} " +
             "AND t.longtitude = :#{#region.longtitude} " +
             "AND (t.year = :#{#region.startYear} OR t.year = :#{#region.endYear}) ORDER BY t.year DESC")
-    List<Temperature> getCityTempByYear(@Param("region") RegionInformation region);
+    List<Temperature> getCityTempByYearRange(@Param("region") RegionInformation region);
 
     @Query("SELECT t FROM Temperature t " +
-            "WHERE t.state = :#{#region.regionName} " +
+            "WHERE t.stateName = :#{#region.regionName} " +
             "AND t.countryName = :#{#region.countryName} " +
-            "AND t.latitude = :#{#region.latitude} " +
-            "AND t.longtitude = :#{#region.longtitude} " +
             "AND (t.year = :#{#region.startYear} OR t.year = :#{#region.endYear}) ORDER BY t.year DESC")
-    List<Temperature> getStateTempByYear(@Param("region") RegionInformation region);
+    List<Temperature> getStateTempByYearRange(@Param("region") RegionInformation region);
 
     @Query("SELECT MIN(t.year) AS start, MAX(t.year) AS end FROM Temperature t")
     Tuple findYearRange();

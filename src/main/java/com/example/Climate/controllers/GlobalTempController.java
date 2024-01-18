@@ -26,9 +26,9 @@ public class GlobalTempController {
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<?> getGlobalTempByYear(@RequestParam("year") int year) {
-        List<GlobalTemperature> globalTempList = service.getGlobalTempByYear(year);
+    @GetMapping("/by-year-range")
+    public ResponseEntity<?> getGlobalTempByYearRange(@RequestBody RegionInformation region) {
+        List<GlobalTemperature> globalTempList = service.getGlobalTempByYearRange(region);
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
 
@@ -39,7 +39,7 @@ public class GlobalTempController {
     }
 
     @GetMapping("/diff")
-    public ResponseEntity<?> getCountryTemperatureDiff(@RequestBody RegionInformation region) {
+    public ResponseEntity<?> getWorldTemperatureDiff(@RequestBody RegionInformation region) {
         TemperatureDTO tempDiff = service.getTemperatureDifference(region);
         return new ResponseEntity<>(tempDiff, HttpStatus.OK);
     }

@@ -37,4 +37,9 @@ public interface PopulationRepository extends JpaRepository<Population, Integer>
             "WHERE p1.countryName = :#{#region.countryName} AND p1.year = :#{#region.endYear} " +
             "AND p2.countryName = :#{#region.countryName}  AND p2.year = :#{#region.startYear}")
     Long getPopulationDifference(@Param("region") RegionInformation region);
+
+    @Query("SELECT p FROM Population p " +
+            "WHERE p.countryName = :#{#region.countryName} " +
+            "AND (p.year = :#{#region.endYear} OR p.year = :#{#region.startYear}) ORDER BY p.year DESC ")
+    List<Population> getCountryPopulationByYearRange(@Param("region") RegionInformation region);
 }

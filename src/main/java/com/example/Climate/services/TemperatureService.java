@@ -26,9 +26,11 @@ public class TemperatureService {
         return repo.getTempByCountry(countryName);
     }
 
-    public List<TemperatureDTO> getCityTempByYear(RegionInformation region) {
+    public List<TemperatureDTO> getRegionTempByYearRange(RegionInformation region) {
         List<Temperature> tempList;
-        tempList = region.getRegion().equals("city") ? repo.getCityTempByYear(region): repo.getStateTempByYear(region);
+        tempList = region.getRegion().isEmpty() ? repo.getCountryTempByYearRange(region)
+                : region.getRegion().equalsIgnoreCase("city") ? repo.getCityTempByYearRange(region)
+                : repo.getStateTempByYearRange(region);
         List<TemperatureDTO> tempDTOList = new ArrayList<>();
         for (Temperature temp : tempList) {
             tempDTOList.add(new TemperatureDTO(temp));
@@ -42,7 +44,7 @@ public class TemperatureService {
     }
 
     public List<String> getAllCountriesOrderByTemperature(String order) {
-        return order.equals("ASC") ? repo.getAllCountriesOrderByTemperatureAsc() : repo.getAllCountriesOrderByTemperatureDesc();
+        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesOrderByTemperatureAsc() : repo.getAllCountriesOrderByTemperatureDesc();
     }
 
     public TemperatureDTO getRegionTemperatureDifference(RegionInformation region) {

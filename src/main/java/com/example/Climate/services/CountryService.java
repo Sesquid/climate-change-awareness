@@ -21,7 +21,7 @@ public class CountryService {
     }
 
     public List<String> getAllCountriesOrderByName(String order) {
-        return order.equals("ASC") ? repo.getAllCountriesOrderByNameAsc() : repo.getAllCountriesOrderByNameDesc();
+        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesOrderByNameAsc() : repo.getAllCountriesOrderByNameDesc();
     }
 
 

@@ -22,9 +22,9 @@ public class CityController {
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<?> getCityByCountryName(@RequestParam("country-name") String countryname) {
-        List<City> cityList = service.getCityByCountryName(countryname);
+    @GetMapping("/by-country")
+    public ResponseEntity<?> getCityByCountryName(@RequestParam("countryName") String countryName) {
+        List<City> cityList = service.getCityByCountryName(countryName);
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 

@@ -14,8 +14,10 @@ import java.util.List;
 @Repository
 public interface GlobalTempRepository extends JpaRepository<GlobalTemperature, Integer> {
 
-    @Query("SELECT g FROM GlobalTemperature g WHERE g.year = :year")
-    List<GlobalTemperature> getGlobalTempByYear(@Param("year") int year);
+    @Query("SELECT t FROM GlobalTemperature t " +
+            "WHERE t.year = :#{#region.startYear} " +
+            "OR t.year = :#{#region.endYear} ORDER BY t.year DESC")
+    List<GlobalTemperature> getGlobalTempByYearRange(@Param("region") RegionInformation region);
 
     @Query("SELECT MIN(g.year) AS start, MAX(g.year) AS end FROM GlobalTemperature g")
     Tuple findYearRange();
