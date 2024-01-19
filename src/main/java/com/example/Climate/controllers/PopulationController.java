@@ -50,7 +50,7 @@ public class PopulationController {
 
     @GetMapping("/all-countries/order-by-population")
     public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam("order") String order) {
-        List<String> countryList = service.getAllCountriesOrderByPopulation(order);
+        List<String> countryList = service.getAllCountriesOrderByPopulationIn2013(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 

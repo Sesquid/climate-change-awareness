@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class YearRange {
-    private int start;
-    private int end;
+    private int startYear;
+    private int endYear;
 }

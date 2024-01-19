@@ -16,6 +16,15 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
     @Query("SELECT t FROM Temperature t WHERE t.countryName = :countryName AND t.stateName IS NULL AND t.cityName IS NULL")
     List<Temperature> getTempByCountry(@Param("countryName") String countryName);
 
+    @Query("SELECT MIN(t.year) AS start, MAX(t.year) AS end FROM Temperature t")
+    Tuple findYearRange();
+
+    @Query("SELECT t.countryName FROM Temperature t WHERE t.year = 2013 AND t.stateName IS NULL AND t.cityName IS NULL ORDER BY t.avgTemp ASC")
+    List<String> getAllCountriesOrderByTemperatureAsc();
+
+    @Query("SELECT t.countryName FROM Temperature t WHERE t.year = 2013 AND t.stateName IS NULL AND t.cityName IS NULL ORDER BY t.avgTemp DESC")
+    List<String> getAllCountriesOrderByTemperatureDesc();
+
     @Query("SELECT t FROM Temperature t " +
             "WHERE t.countryName = :#{#region.countryName} " +
             "AND t.stateName IS NULL AND t.cityName IS NULL " +
@@ -35,15 +44,6 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
             "AND t.countryName = :#{#region.countryName} " +
             "AND (t.year = :#{#region.startYear} OR t.year = :#{#region.endYear}) ORDER BY t.year DESC")
     List<Temperature> getStateTempByYearRange(@Param("region") RegionInformation region);
-
-    @Query("SELECT MIN(t.year) AS start, MAX(t.year) AS end FROM Temperature t")
-    Tuple findYearRange();
-
-    @Query("SELECT t.countryName FROM Temperature t WHERE t.year = 2013 AND t.stateName IS NULL AND t.cityName IS NULL ORDER BY t.avgTemp ASC")
-    List<String> getAllCountriesOrderByTemperatureAsc();
-
-    @Query("SELECT t.countryName FROM Temperature t WHERE t.year = 2013 AND t.stateName IS NULL AND t.cityName IS NULL ORDER BY t.avgTemp DESC")
-    List<String> getAllCountriesOrderByTemperatureDesc();
 
     @Query("SELECT " +
             "t1.avgTemp - t2.avgTemp AS avgTemp, " +
@@ -77,4 +77,24 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
             "AND t1.year = :#{#region.endYear} AND t1.countryName = :#{#region.countryName} " +
             "AND t2.year = :#{#region.startYear} AND t2.countryName = :#{#region.countryName} ")
     Tuple getStateTemperatureDiff(@Param("region") RegionInformation region);
+
+    @Query("SELECT AVG(t.avgTemp) " +
+            "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
+            "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
+    Float getCountryAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+
+    @Query("SELECT AVG(t.avgTemp) " +
+            "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
+            "AND t.stateName = :#{#region.regionName} " +
+            "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
+    Float getStateAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+
+    @Query("SELECT AVG(t.avgTemp) " +
+            "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
+            "AND t.cityName = :#{#region.regionName} " +
+            "AND t.latitude = :#{#region.latitude} " +
+            "AND t.longtitude = :#{#region.longtitude} " +
+            "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
+    Float getCityAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+
 }

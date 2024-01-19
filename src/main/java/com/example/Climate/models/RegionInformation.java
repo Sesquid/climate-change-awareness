@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegionInformation {
     String countryName;
-    String region;
+    String regionType;
     String regionName;
     String latitude;
     String longtitude;
@@ -27,9 +27,9 @@ public class RegionInformation {
         this.endYear = endYear;
     }
 
-    public RegionInformation(String countryName, String region, String regionName, int startYear, int endYear) {
+    public RegionInformation(String countryName, String regionType, String regionName, int startYear, int endYear) {
         this.countryName = countryName;
-        this.region = region;
+        this.regionType = regionType;
         this.regionName = regionName;
         this.startYear = startYear;
         this.endYear = endYear;

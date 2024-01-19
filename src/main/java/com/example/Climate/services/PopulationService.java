@@ -37,8 +37,8 @@ public class PopulationService {
         return repo.getPopulationListByCountryName(countryName);
     }
 
-    public List<String> getAllCountriesOrderByPopulation(String order) {
-        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesOrderByPopulationAsc() : repo.getAllCountriesOrderByPopulationDesc();
+    public List<String> getAllCountriesOrderByPopulationIn2013(String order) {
+        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesIn2013OrderByPopulationAsc() : repo.getAllCountriesIn2013OrderByPopulationDesc();
     }
 
     public Long getPopulationDifference(RegionInformation region) {

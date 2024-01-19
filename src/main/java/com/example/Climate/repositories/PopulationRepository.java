@@ -28,10 +28,10 @@ public interface PopulationRepository extends JpaRepository<Population, Integer>
     Tuple findYearRange();
 
     @Query("SELECT p.countryName FROM Population p WHERE p.year = 2013 ORDER BY p.population ASC")
-    List<String> getAllCountriesOrderByPopulationAsc();
+    List<String> getAllCountriesIn2013OrderByPopulationAsc();
 
     @Query("SELECT p.countryName FROM Population p WHERE p.year = 2013 ORDER BY p.population DESC")
-    List<String> getAllCountriesOrderByPopulationDesc();
+    List<String> getAllCountriesIn2013OrderByPopulationDesc();
 
     @Query("SELECT p1.population - p2.population FROM Population p1, Population p2 " +
             "WHERE p1.countryName = :#{#region.countryName} AND p1.year = :#{#region.endYear} " +

@@ -28,8 +28,8 @@ public class TemperatureService {
 
     public List<TemperatureDTO> getRegionTempByYearRange(RegionInformation region) {
         List<Temperature> tempList;
-        tempList = region.getRegion().isEmpty() ? repo.getCountryTempByYearRange(region)
-                : region.getRegion().equalsIgnoreCase("city") ? repo.getCityTempByYearRange(region)
+        tempList = region.getRegionType().equalsIgnoreCase("country") ? repo.getCountryTempByYearRange(region)
+                : region.getRegionType().equalsIgnoreCase("city") ? repo.getCityTempByYearRange(region)
                 : repo.getStateTempByYearRange(region);
         List<TemperatureDTO> tempDTOList = new ArrayList<>();
         for (Temperature temp : tempList) {
@@ -49,8 +49,8 @@ public class TemperatureService {
 
     public TemperatureDTO getRegionTemperatureDifference(RegionInformation region) {
         Tuple tempDiff;
-        tempDiff = region.getRegion().isEmpty() ? repo.getCountryTemperatureDiff(region)
-                : region.getRegion().equals("state") ? repo.getStateTemperatureDiff(region)
+        tempDiff = region.getRegionType().equalsIgnoreCase("country") ? repo.getCountryTemperatureDiff(region)
+                : region.getRegionType().equalsIgnoreCase("state") ? repo.getStateTemperatureDiff(region)
                 : repo.getCityTemperatureDiff(region);
         if (tempDiff == null) {
             throw new NoDataException("Data provided not valid!");
