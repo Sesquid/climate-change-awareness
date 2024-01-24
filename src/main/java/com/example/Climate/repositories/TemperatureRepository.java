@@ -81,13 +81,13 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
     @Query("SELECT AVG(t.avgTemp) " +
             "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
             "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
-    Float getCountryAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+    Float getCountryAverageTemperatureInTimePeriod(@Param("region") RegionInformation region);
 
     @Query("SELECT AVG(t.avgTemp) " +
             "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
             "AND t.stateName = :#{#region.regionName} " +
             "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
-    Float getStateAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+    Float getStateAverageTemperatureInTimePeriod(@Param("region") RegionInformation region);
 
     @Query("SELECT AVG(t.avgTemp) " +
             "FROM Temperature t WHERE t.countryName = :#{#region.countryName} " +
@@ -95,6 +95,23 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Intege
             "AND t.latitude = :#{#region.latitude} " +
             "AND t.longtitude = :#{#region.longtitude} " +
             "AND t.year >= :#{#region.startYear} AND t.year <= :#{#region.endYear}")
-    Float getCityAverageTemperatureInTimePeriod (@Param("region") RegionInformation region);
+    Float getCityAverageTemperatureInTimePeriod(@Param("region") RegionInformation region);
+
+    @Query("SELECT t FROM Temperature t " +
+            "WHERE t.countryName = :#{#region.countryName} " +
+            "AND t.stateName IS NULL AND t.cityName IS NULL ")
+    List<Temperature> getTemperatureByCountry(@Param("region") RegionInformation region);
+
+    @Query("SELECT t FROM Temperature t " +
+            "WHERE t.cityName = :#{#region.regionName} " +
+            "AND t.countryName = :#{#region.countryName} " +
+            "AND t.latitude = :#{#region.latitude} " +
+            "AND t.longtitude = :#{#region.longtitude} ")
+    List<Temperature> getTemperatureByCity(@Param("region") RegionInformation region);
+
+    @Query("SELECT t FROM Temperature t " +
+            "WHERE t.stateName = :#{#region.regionName} " +
+            "AND t.countryName = :#{#region.countryName} ")
+    List<Temperature> getTemperatureByState(@Param("region") RegionInformation region);
 
 }

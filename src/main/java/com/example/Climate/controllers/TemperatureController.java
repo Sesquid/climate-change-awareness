@@ -48,8 +48,21 @@ public class TemperatureController {
     }
 
     @GetMapping("/by-year-range")
-    public ResponseEntity<?> getCityTempByYear(@RequestBody RegionInformation region) {
+    public ResponseEntity<?> getRegionTempByYear(@RequestBody RegionInformation region) {
         List<TemperatureDTO> tempList = service.getRegionTempByYearRange(region);
         return new ResponseEntity<>(tempList, HttpStatus.OK);
     }
+
+    @PostMapping("/by-region")
+    public ResponseEntity<?> getTemperatureByRegion(@RequestBody RegionInformation region) {
+        List<Temperature> tempList = service.getTemperatureListByRegion(region);
+        return new ResponseEntity<>(tempList, HttpStatus.OK);
+    }
+
+    @PostMapping("/region-average-temp/by-time-period")
+    public ResponseEntity<?> getRegionAverageTemperatureInTimePeriod(@RequestBody RegionInformation region) {
+        Float avgTemp = service.getRegionAverageTemperatureInTimePeriod(region);
+        return new ResponseEntity<>(avgTemp, HttpStatus.OK);
+    }
+
 }

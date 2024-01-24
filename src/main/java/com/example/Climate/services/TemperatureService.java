@@ -35,7 +35,7 @@ public class TemperatureService {
         for (Temperature temp : tempList) {
             tempDTOList.add(new TemperatureDTO(temp));
         }
-        return tempDTOList;
+        return tempList.size() == 2 ? tempDTOList : new ArrayList<>();
     }
 
     public YearRange findYearRange() {
@@ -60,4 +60,19 @@ public class TemperatureService {
                 (Float) tempDiff.get("maxTemp"));
     }
 
+    public List<Temperature> getTemperatureListByRegion(RegionInformation region) {
+        List<Temperature> tempList;
+        tempList = region.getRegionType().equalsIgnoreCase("country") ? repo.getTemperatureByCountry(region)
+                : region.getRegionType().equalsIgnoreCase("city") ? repo.getTemperatureByCity(region)
+                : repo.getTemperatureByState(region);
+        return tempList;
+    }
+
+    public Float getRegionAverageTemperatureInTimePeriod(RegionInformation region) {
+        Float avgTemp;
+        avgTemp = region.getRegionType().equalsIgnoreCase("country") ? repo.getCountryAverageTemperatureInTimePeriod(region)
+                : region.getRegionType().equalsIgnoreCase("city") ? repo.getCityAverageTemperatureInTimePeriod(region)
+                : repo.getStateAverageTemperatureInTimePeriod(region);
+        return avgTemp;
+    }
 }
