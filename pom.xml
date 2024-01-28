@@ -8,7 +8,7 @@
         <version>2.6.0</version>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>Climate_server</artifactId>
+    <artifactId>climate-change-awareness</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Climate</name>
     <description>Demo project for Spring Boot</description>
@@ -88,16 +88,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder:tiny</builder>
-                    </image>
-                </configuration>
-            </plugin>
         </plugins>
+        <finalName>climate-change-awarness-server</finalName>
     </build>
 
 </project>
