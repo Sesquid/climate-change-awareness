@@ -19,11 +19,11 @@ public class Temperature {
     @Column(name = "year")
     private int year;
     @Column(name = "average_temperature")
-    private Float avgTemp;
+    private Double avgTemp;
     @Column(name = "min_temperature")
-    private Float minTemp;
+    private Double minTemp;
     @Column(name = "max_temperature")
-    private Float maxTemp;
+    private Double maxTemp;
     @ManyToOne
     @JoinColumn(name = "city_id", foreignKey = @ForeignKey(name = "fk_temp_to_city"), referencedColumnName = "city_id")
     private City city;
@@ -40,9 +40,9 @@ public class Temperature {
     @Column(name = "state_name")
     private String stateName;
     private String latitude;
-    private String longtitude;
+    private String longitude;
 
-    public Temperature(Float avgTemp, Float minTemp, Float maxTemp) {
+    public Temperature(Double avgTemp, Double minTemp, Double maxTemp) {
         this.avgTemp = avgTemp;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;

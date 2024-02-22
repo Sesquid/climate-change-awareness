@@ -1,8 +1,9 @@
 package com.example.Climate.controllers;
 
+import com.example.Climate.models.Country;
 import com.example.Climate.models.Population;
-import com.example.Climate.models.RegionInformation;
-import com.example.Climate.models.YearRange;
+import com.example.Climate.dto.RegionInformation;
+import com.example.Climate.dto.YearRange;
 import com.example.Climate.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,25 +37,25 @@ public class PopulationController {
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
-    @GetMapping("/year-range")
+    @GetMapping("/get-year-range")
     public ResponseEntity<?> findYearRange() {
         YearRange years = service.findYearRange();
         return new ResponseEntity<>(years, HttpStatus.OK);
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam("countryName") String countryName) {
-        List<Population> populationList = service.getPopulationListByCountryName(countryName);
+    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam("countryCode") String countryCode) {
+        List<Population> populationList = service.getPopulationListByCountryCode(countryCode);
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
-    @GetMapping("/all-countries/order-by-population")
+    @GetMapping("/get-countries/order-by-population")
     public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam("order") String order) {
-        List<String> countryList = service.getAllCountriesOrderByPopulationIn2013(order);
+        List<Country> countryList = service.getAllCountriesOrderBy2013Population(order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 
-    @GetMapping("/diff")
+    @GetMapping("/diff-by-years")
     public ResponseEntity<?> getPopulationDifference(@RequestBody RegionInformation region) {
         Long diff = service.getPopulationDifference(region);
         return new ResponseEntity<>(diff, HttpStatus.OK);

@@ -1,14 +1,13 @@
 package com.example.Climate.services;
 
+import com.example.Climate.models.Country;
 import com.example.Climate.models.Population;
-import com.example.Climate.models.RegionInformation;
-import com.example.Climate.models.YearRange;
+import com.example.Climate.dto.RegionInformation;
+import com.example.Climate.dto.YearRange;
 import com.example.Climate.repositories.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Tuple;
 import java.util.List;
 
 @Service
@@ -29,20 +28,21 @@ public class PopulationService {
     }
 
     public YearRange findYearRange() {
-        Tuple yearRange = repo.findYearRange();
-        return new YearRange(yearRange.get("start", Integer.class), yearRange.get("end", Integer.class));
+        return repo.findPopulationYearRange();
     }
 
-    public List<Population> getPopulationListByCountryName(String countryName) {
-        return repo.getPopulationListByCountryName(countryName);
+    public List<Population> getPopulationListByCountryCode(String countryCode) {
+        return repo.getPopulationListByCountryCode(countryCode);
     }
 
-    public List<String> getAllCountriesOrderByPopulationIn2013(String order) {
-        return order.equalsIgnoreCase("ASC") ? repo.getAllCountriesIn2013OrderByPopulationAsc() : repo.getAllCountriesIn2013OrderByPopulationDesc();
+    public List<Country> getAllCountriesOrderBy2013Population(String order) {
+        return order.equalsIgnoreCase("ASC")
+                ? repo.getAllCountriesOrderBy2013PopulationAsc()
+                : repo.getAllCountriesOrderBy2013PopulationDesc();
     }
 
     public Long getPopulationDifference(RegionInformation region) {
-        return repo.getPopulationDifference(region);
+        return repo.findPopulationDifference(region);
     }
 
     public List<Population> getCountryPopulationByYearRange(RegionInformation region){

@@ -19,15 +19,15 @@ public class GlobalTemperature {
     @Column(name = "year")
     private int year;
     @Column(name = "average_temperature")
-    private Float avgTemp;
+    private Double avgTemp;
     @Column(name = "min_temperature")
-    private Float minTemp;
+    private Double minTemp;
     @Column(name = "max_temperature")
-    private Float maxTemp;
+    private Double maxTemp;
     @Column(name = "land_ocean_average_temperature")
-    private Float landOceanAvgTemp;
+    private Double landOceanAvgTemp;
     @Column(name = "land_ocean_min_temperature")
-    private Float landOceanMinTemp;
+    private Double landOceanMinTemp;
     @Column(name = "land_ocean_max_temperature")
-    private Float landOceanMaxTemp;
+    private Double landOceanMaxTemp;
 }

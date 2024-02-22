@@ -25,5 +25,5 @@ public class City {
     @Column(name = "country_name")
     private String countryName;
     private String latitude;
-    private String longtitude;
+    private String longitude;
 }

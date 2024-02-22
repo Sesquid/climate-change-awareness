@@ -23,8 +23,8 @@ public class CityController {
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getCityByCountryName(@RequestParam("countryName") String countryName) {
-        List<City> cityList = service.getCityByCountryName(countryName);
+    public ResponseEntity<?> getCityByCountryId(@RequestParam("countryCode") String countryCode) {
+        List<City> cityList = service.getCityByCountryCode(countryCode);
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 

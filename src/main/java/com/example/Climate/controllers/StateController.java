@@ -25,8 +25,8 @@ public class StateController {
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getStateByCountryName(@RequestParam("countryName") String countryName) {
-        List<State> stateList = service.getStateByCountryName(countryName);
+    public ResponseEntity<?> getStateByCountryCode(@RequestParam("countryCode") String countryCode) {
+        List<State> stateList = service.getStateByCountryCode(countryCode);
         return new ResponseEntity<>(stateList, HttpStatus.OK);
     }
 

@@ -3,10 +3,11 @@ package com.example.Climate.utils;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -50,10 +51,44 @@ public class Util {
     }
 
     public static void main(String[] args) throws IOException {
-        Util util = new Util();
-        util.csv2Dto1D();
+        addDataToDatabase();
     }
 
-    public static void checkListEmpty(List<?> list) {
+    public static void addDataToDatabase() {
+        String user = "root";
+        String password = "30092002aA@";
+        String jdbcUrl = "jdbc:postgresql://monorail.proxy.rlwy.net:39119/climate";
+
+        try {
+            Connection connection = DriverManager.getConnection(jdbcUrl, user, password);
+            Statement statement = connection.createStatement();
+            String sqlFilePath = "F:\\Intern\\climate-change-awareness\\climate_dump.sql";
+
+            // Read SQL dump file
+            BufferedReader br = new BufferedReader(new FileReader(sqlFilePath));
+            StringBuilder sql = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sql.append(line).append("\n");
+            }
+            br.close();
+
+            // Execute SQL statements
+            String[] sqlStatements = sql.toString().split(";");
+            for (String sqlStatement : sqlStatements) {
+                if (!sqlStatement.trim().isEmpty()) {
+                    statement.execute(sqlStatement);
+                }
+            }
+
+            connection.close();
+            System.out.println("SQL statements executed successfully.");
+
+        } catch (SQLException | FileNotFoundException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

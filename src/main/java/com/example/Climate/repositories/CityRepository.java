@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface CityRepository extends JpaRepository<City, Integer> {
 
-    @Query("SELECT c FROM City c WHERE c.countryName = :countryName")
-    List<City> getCityByCountryName(@Param("countryName") String countryName);
+    @Query("SELECT c FROM City c WHERE c.country.countryCode = :countryCode")
+    List<City> getCityByCountryCode(@Param("countryCode") String countryCode);
 
     @Query("SELECT COUNT(*) FROM City")
     int getNumberOfCities();

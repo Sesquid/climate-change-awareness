@@ -17,8 +17,8 @@ public class StateService {
         return repo.findAll();
     }
 
-    public List<State> getStateByCountryName(String countryName) {
-        return repo.getStateByCountryName(countryName);
+    public List<State> getStateByCountryCode(String countryCode) {
+        return repo.getStateByCountryCode(countryCode);
     }
 
     public int getNumberOfStates() {
