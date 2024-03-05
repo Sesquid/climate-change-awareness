@@ -1,9 +1,8 @@
 package com.example.Climate.controllers;
 
-import com.example.Climate.models.Country;
-import com.example.Climate.models.Population;
-import com.example.Climate.dto.RegionInformation;
+import com.example.Climate.dto.ComparePopulation;
 import com.example.Climate.dto.YearRange;
+import com.example.Climate.models.Population;
 import com.example.Climate.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,26 +43,24 @@ public class PopulationController {
     }
 
     @GetMapping("/by-country")
-    public ResponseEntity<?> getPopulationListByCountryName(@RequestParam("countryCode") String countryCode) {
+    public ResponseEntity<?> getPopulationListByCountryCode(@RequestParam("countryCode") String countryCode) {
         List<Population> populationList = service.getPopulationListByCountryCode(countryCode);
         return new ResponseEntity<>(populationList, HttpStatus.OK);
     }
 
-    @GetMapping("/get-countries/order-by-population")
-    public ResponseEntity<?> getAllCountriesOrderByPopulation(@RequestParam("order") String order) {
-        List<Country> countryList = service.getAllCountriesOrderBy2013Population(order);
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
-
     @GetMapping("/diff-by-years")
-    public ResponseEntity<?> getPopulationDifference(@RequestBody RegionInformation region) {
-        Long diff = service.getPopulationDifference(region);
+    public ResponseEntity<?> getPopulationDifference(@RequestParam("countryCode") String countryCode,
+                                                     @RequestParam("startYear") int startYear,
+                                                     @RequestParam("endYear") int endYear) {
+        ComparePopulation diff = service.getPopulationDifference(countryCode, startYear, endYear);
         return new ResponseEntity<>(diff, HttpStatus.OK);
     }
 
-    @GetMapping("/by-year-range")
-    public ResponseEntity<?> getCountryPopulationByYearRange(@RequestBody RegionInformation region) {
-        List<Population> populationList = service.getCountryPopulationByYearRange(region);
-        return new ResponseEntity<>(populationList, HttpStatus.OK);
-    }
+//    @GetMapping("/by-year-range")
+//    public ResponseEntity<?> getCountryPopulationByYearRange(@RequestParam("countryCode") String countryCode,
+//                                                             @RequestParam("startYear") int startYear,
+//                                                             @RequestParam("endYear") int endYear) {
+//        List<Population> populationList = service.getCountryPopulationByYearRange(countryCode, startYear, endYear);
+//        return new ResponseEntity<>(populationList, HttpStatus.OK);
+//    }
 }

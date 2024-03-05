@@ -1,6 +1,6 @@
 package com.example.Climate.controllers;
 
-import com.example.Climate.dto.RegionInformation;
+import com.example.Climate.dto.CompareTemperature;
 import com.example.Climate.dto.SimilarRegion;
 import com.example.Climate.dto.TemperatureDTO;
 import com.example.Climate.dto.YearRange;
@@ -21,10 +21,10 @@ public class TemperatureController {
     @Autowired
     TemperatureService service;
 
-    @GetMapping("/get-all")
-    public ResponseEntity<?> getAllTemp() {
-        return new ResponseEntity<>(service.getAllTemp(), HttpStatus.OK);
-    }
+//    @GetMapping("/get-all")
+//    public ResponseEntity<?> getAllTemp() {
+//        return new ResponseEntity<>(service.getAllTemp(), HttpStatus.OK);
+//    }
 
     @GetMapping("/get-year-range")
     public ResponseEntity<?> findYearRange() {
@@ -32,48 +32,52 @@ public class TemperatureController {
         return new ResponseEntity<>(yearRange, HttpStatus.OK);
     }
 
-    @GetMapping("/get-countries/order-by-temperature")
-    public ResponseEntity<?> getAllCountriesOrderByTemperature(@RequestParam("order") String order) {
-        List<String> countryList = service.getAllCountriesOrderByTemperature(order);
-        return new ResponseEntity<>(countryList, HttpStatus.OK);
-    }
-
-    @GetMapping("region-temperature/diff-by-years")
-    public ResponseEntity<?> getCountryTemperatureDiff(@RequestBody RegionInformation region) {
-        TemperatureDTO tempDiff = service.getRegionTemperatureDifference(region);
+    @GetMapping("/region-temperature/diff-by-years")
+    public ResponseEntity<?> getRegionTemperatureDiff(@RequestParam("countryId") Integer countryId,
+                                                      @RequestParam("cityId") Optional<Integer> cityId,
+                                                      @RequestParam("stateId") Optional<Integer> stateId,
+                                                      @RequestParam("startYear") Integer startYear,
+                                                      @RequestParam("endYear") Integer endYear) {
+        CompareTemperature tempDiff = service.getRegionTemperatureDifference(countryId, stateId, cityId, startYear, endYear);
         return new ResponseEntity<>(tempDiff, HttpStatus.OK);
     }
 
-    @GetMapping("/region-temperature/by-year-range")
-    public ResponseEntity<?> getRegionTemperatureByYear(@RequestBody RegionInformation region) {
-        List<TemperatureDTO> tempList = service.getRegionTemperatureByYearRange(region);
+    //    @GetMapping("/region-temperature/by-year-range")
+//    public ResponseEntity<?> getRegionTemperatureByYear(@RequestBody RegionInformation region) {
+//        List<TemperatureDTO> tempList = service.getRegionTemperatureByYearRange(region);
+//        return new ResponseEntity<>(tempList, HttpStatus.OK);
+//    }
+
+    @GetMapping("/region-temperature-list")
+    public ResponseEntity<?> getRegionTemperatureList(@RequestParam("countryId") Integer countryId,
+                                                      @RequestParam("cityId") Optional<Integer> cityId,
+                                                      @RequestParam("stateId") Optional<Integer> stateId) {
+        List<Temperature> tempList = service.getTemperatureListByRegion(countryId, stateId, cityId);
         return new ResponseEntity<>(tempList, HttpStatus.OK);
     }
 
-    @PostMapping("/region-temperature-list")
-    public ResponseEntity<?> getTemperatureByRegion(@RequestBody RegionInformation region) {
-        List<Temperature> tempList = service.getTemperatureListByRegion(region);
-        return new ResponseEntity<>(tempList, HttpStatus.OK);
-    }
-
-    @PostMapping("/region-average-temperature/by-time-period")
-    public ResponseEntity<?> getRegionAverageTemperatureInTimePeriod(@RequestBody RegionInformation region) {
-        TemperatureDTO avgTemp = service.getRegionAverageTemperatureInTimePeriod(region);
+    //
+    @GetMapping("/region-average-temperature/by-time-period")
+    public ResponseEntity<?> getRegionAverageTemperatureInTimePeriod(@RequestParam("countryId") Integer countryId,
+                                                                     @RequestParam("cityId") Optional<Integer> cityId,
+                                                                     @RequestParam("stateId") Optional<Integer> stateId,
+                                                                     @RequestParam("startYear") Integer startYear,
+                                                                     @RequestParam("timePeriod") Integer timePeriod) {
+        TemperatureDTO avgTemp = service.getRegionAverageTemperatureInTimePeriod(countryId, stateId, cityId, startYear, timePeriod);
         return new ResponseEntity<>(avgTemp, HttpStatus.OK);
     }
 
-    @GetMapping("/similar-by-temperature")
-    public ResponseEntity<?> getRegionSimilarByTemperature(@RequestParam("countryId") Integer countryId,
+    @GetMapping("/similar-region")
+    public ResponseEntity<?> getRegionBySimilarTemperature(@RequestParam("countryId") Integer countryId,
                                                            @RequestParam("cityId") Optional<Integer> cityId,
                                                            @RequestParam("stateId") Optional<Integer> stateId,
                                                            @RequestParam("startYear") Integer startYear,
-                                                           @RequestParam("endYear") Integer endYear,
                                                            @RequestParam("timePeriod") Integer timePeriod,
                                                            @RequestParam("limit") Integer limit) {
 
-        List<SimilarRegion> similarTemperatures = service.getSimilarRegionByTemperature(countryId, stateId,
-                cityId, startYear, endYear, timePeriod, limit);
+        List<SimilarRegion> similarRegions = service.getSimilarRegionByTemperature(countryId, stateId,
+                cityId, startYear, timePeriod, limit);
 
-        return new ResponseEntity<>(similarTemperatures, HttpStatus.OK);
+        return new ResponseEntity<>(similarRegions, HttpStatus.OK);
     }
 }

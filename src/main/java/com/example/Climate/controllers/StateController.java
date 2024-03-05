@@ -19,7 +19,7 @@ public class StateController {
     StateService service;
 
     @GetMapping("/get-all")
-    public ResponseEntity<?> getAllCities() {
+    public ResponseEntity<?> getAllStates() {
         List<State> stateList = service.getAllStates();
         return new ResponseEntity<>(stateList, HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package com.example.Climate.controllers;
 
+import com.example.Climate.dto.CountryDTO;
 import com.example.Climate.models.Country;
 import com.example.Climate.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,10 @@ public class CountryController {
         return new ResponseEntity<>(numberOfCountries, HttpStatus.OK);
     }
 
-    @GetMapping("/get-all/order-by-name")
-    public ResponseEntity<?> getAllCountries(@RequestParam("order") String order) {
-        List<Country> countryList = service.getAllCountries(order);
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllCountries(@RequestParam("order") String order,
+                                             @RequestParam("type") String type) {
+        List<Country> countryList = service.getAllCountries(type, order);
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }
 

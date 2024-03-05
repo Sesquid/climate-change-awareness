@@ -1,9 +1,9 @@
 package com.example.Climate.services;
 
+import com.example.Climate.dto.CountryDTO;
 import com.example.Climate.models.Country;
 import com.example.Climate.repositories.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +13,7 @@ public class CountryService {
     @Autowired
     CountryRepository repo;
 
+
     public List<Country> getAllCountries() {
         return repo.findAll();
     }
@@ -21,13 +22,19 @@ public class CountryService {
         return repo.getNumberOfCountries();
     }
 
-    public List<Country> getAllCountries(String order) {
-        List<Country> countryList;
-        if (order.equalsIgnoreCase("ASC"))
-            countryList = repo.findAll(Sort.by(Sort.Direction.ASC, "countryName"));
-        else
-            countryList = repo.findAll(Sort.by(Sort.Direction.DESC, "countryName"));
-        return countryList;
+    public List<Country> getAllCountries(String type, String order) {
+
+        return switch (type) {
+            case "population" -> order.equalsIgnoreCase("asc")
+                    ? repo.getCountryOrderByPopulationASC()
+                    : repo.getCountryOrderByPopulationDESC();
+            case "temperature" -> order.equalsIgnoreCase("asc")
+                    ? repo.getCountryOrderByTemperatureASC()
+                    : repo.getCountryOrderByTemperatureDESC();
+            default -> order.equalsIgnoreCase("asc")
+                    ? repo.getCountryOrderByNameASC()
+                    : repo.getCountryOrderByNameDESC();
+        };
     }
 
 

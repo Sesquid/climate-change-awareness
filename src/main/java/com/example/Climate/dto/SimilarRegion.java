@@ -1,7 +1,5 @@
 package com.example.Climate.dto;
 
-import com.example.Climate.models.City;
-import com.example.Climate.models.State;
 
 
 public interface SimilarRegion {

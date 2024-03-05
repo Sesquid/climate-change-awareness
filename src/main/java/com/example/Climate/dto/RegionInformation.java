@@ -8,30 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RegionInformation {
-    String countryName;
-    String regionType;
-    String regionName;
-    String latitude;
-    String longtitude;
+    int countryId;
+    int cityId;
+    int stateId;
     int startYear;
     int endYear;
 
-    public RegionInformation(String countryName, int startYear, int endYear) {
-        this.countryName = countryName;
-        this.startYear = startYear;
-        this.endYear = endYear;
-    }
-
-    public RegionInformation(int startYear, int endYear) {
-        this.startYear = startYear;
-        this.endYear = endYear;
-    }
-
-    public RegionInformation(String countryName, String regionType, String regionName, int startYear, int endYear) {
-        this.countryName = countryName;
-        this.regionType = regionType;
-        this.regionName = regionName;
-        this.startYear = startYear;
-        this.endYear = endYear;
-    }
 }

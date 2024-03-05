@@ -1,9 +1,9 @@
 package com.example.Climate.services;
 
+import com.example.Climate.dto.ComparePopulation;
+import com.example.Climate.dto.YearRange;
 import com.example.Climate.models.Country;
 import com.example.Climate.models.Population;
-import com.example.Climate.dto.RegionInformation;
-import com.example.Climate.dto.YearRange;
 import com.example.Climate.repositories.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,17 +35,12 @@ public class PopulationService {
         return repo.getPopulationListByCountryCode(countryCode);
     }
 
-    public List<Country> getAllCountriesOrderBy2013Population(String order) {
-        return order.equalsIgnoreCase("ASC")
-                ? repo.getAllCountriesOrderBy2013PopulationAsc()
-                : repo.getAllCountriesOrderBy2013PopulationDesc();
+
+    public ComparePopulation getPopulationDifference(String countryCode, int startYear, int endYear) {
+        return repo.findPopulationDifference(countryCode, startYear, endYear);
     }
 
-    public Long getPopulationDifference(RegionInformation region) {
-        return repo.findPopulationDifference(region);
-    }
-
-    public List<Population> getCountryPopulationByYearRange(RegionInformation region){
-        return repo.getCountryPopulationByYearRange(region);
-    }
+//    public List<Population> getCountryPopulationByYearRange(String countryCode, int startYear, int endYear) {
+//        return repo.getCountryPopulationByYearRange(countryCode, startYear, endYear);
+//    }
 }

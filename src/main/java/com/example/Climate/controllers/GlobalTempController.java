@@ -1,7 +1,7 @@
 package com.example.Climate.controllers;
 
 
-import com.example.Climate.dto.TemperatureDTO;
+import com.example.Climate.dto.CompareTemperature;
 import com.example.Climate.dto.YearRange;
 import com.example.Climate.models.GlobalTemperature;
 import com.example.Climate.services.GlobalTempService;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/global-temp")
+@RequestMapping("/api/global-temperature")
 public class GlobalTempController {
 
     @Autowired
@@ -26,11 +26,11 @@ public class GlobalTempController {
         return new ResponseEntity<>(globalTempList, HttpStatus.OK);
     }
 
-    @GetMapping("/by-year-range")
-    public ResponseEntity<?> getGlobalTempByYearRange(@RequestBody YearRange yearRange) {
-        List<GlobalTemperature> globalTempList = service.getGlobalTempByYearRange(yearRange);
-        return new ResponseEntity<>(globalTempList, HttpStatus.OK);
-    }
+//    @GetMapping("/by-year-range")
+//    public ResponseEntity<?> getGlobalTempByYearRange(@RequestBody YearRange yearRange) {
+//        List<GlobalTemperature> globalTempList = service.getGlobalTempByYearRange(yearRange);
+//        return new ResponseEntity<>(globalTempList, HttpStatus.OK);
+//    }
 
     @GetMapping("/year-range")
     public ResponseEntity<?> findYearRange() {
@@ -39,8 +39,9 @@ public class GlobalTempController {
     }
 
     @GetMapping("/diff-by-years")
-    public ResponseEntity<?> getWorldTemperatureDiff(@RequestBody YearRange yearRange) {
-        TemperatureDTO tempDiff = service.getTemperatureDifference(yearRange);
+    public ResponseEntity<?> getWorldTemperatureDiff(@RequestParam("startYear") int startYear,
+                                                     @RequestParam("endYear") int endYear) {
+        CompareTemperature tempDiff = service.getTemperatureDifference(startYear, endYear);
         return new ResponseEntity<>(tempDiff, HttpStatus.OK);
     }
 }
