@@ -27,20 +27,20 @@ public class Temperature {
     @ManyToOne
     @JoinColumn(name = "city_id", foreignKey = @ForeignKey(name = "fk_temp_to_city"), referencedColumnName = "city_id")
     private City city;
-    @Column(name = "city_name")
-    private String cityName;
+//    @Column(name = "city_name")
+//    private String cityName;
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_temp_to_country"), referencedColumnName = "country_id")
     private Country country;
-    @Column(name = "country_name")
-    private String countryName;
+//    @Column(name = "country_name")
+//    private String countryName;
     @ManyToOne
     @JoinColumn(name = "state_id", foreignKey = @ForeignKey(name = "fk_temp_to_state"), referencedColumnName = "state_id")
     private State state;
-    @Column(name = "state_name")
-    private String stateName;
-    private String latitude;
-    private String longitude;
+//    @Column(name = "state_name")
+//    private String stateName;
+//    private String latitude;
+//    private String longitude;
 
     public Temperature(Double avgTemp, Double minTemp, Double maxTemp) {
         this.avgTemp = avgTemp;

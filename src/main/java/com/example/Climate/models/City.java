@@ -22,8 +22,8 @@ public class City {
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_city_to_country"), referencedColumnName = "country_id")
     private Country country;
-    @Column(name = "country_name")
-    private String countryName;
+//    @Column(name = "country_name")
+//    private String countryName;
     private String latitude;
     private String longitude;
 }

@@ -33,7 +33,7 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
     @Query(value = """
             SELECT DISTINCT c, p.population
             FROM Country c
-            JOIN Population p ON c.countryCode = p.countryCode
+            JOIN Population p ON c.id = p.country.id
             WHERE p.year = 2013
             ORDER BY p.population ASC
             """)
@@ -42,7 +42,7 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
     @Query(value = """
             SELECT DISTINCT c, p.population
             FROM Country c
-            JOIN Population p ON c.countryCode = p.countryCode
+            JOIN Population p ON c.id = p.country.id
             WHERE p.year = 2013
             ORDER BY p.population DESC
             """)

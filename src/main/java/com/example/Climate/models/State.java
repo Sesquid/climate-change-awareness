@@ -21,6 +21,6 @@ public class State {
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_state_to_country"), referencedColumnName = "country_id")
     private Country country;
-    @Column(name = "country_name")
-    private String countryName;
+//    @Column(name = "country_name")
+//    private String countryName;
 }

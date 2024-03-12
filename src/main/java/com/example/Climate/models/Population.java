@@ -19,10 +19,10 @@ public class Population {
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_population_to_country"), referencedColumnName = "country_id")
     private Country country;
-    @Column(name = "country_name")
-    private String countryName;
-    @Column(name = "country_code")
-    private String countryCode;
+//    @Column(name = "country_name")
+//    private String countryName;
+//    @Column(name = "country_code")
+//    private String countryCode;
     @Column(name = "year")
     private int year;
     @Column(name = "population_amount")
